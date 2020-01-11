@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV.fetch("MYSQL_USER", "root") %>
-  password: <%= ENV.fetch("MYSQL_PASSWORD", "") %>
+  password: <%= ENV["MYSQL_PASSWORD"] || ENV["MYSQL_ROOT_PASSWORD"] %>
   port:     <%= ENV.fetch("MYSQL_PORT", 3306) %>
   host:     <%= ENV["DB_HOST"] || "127.0.0.1" %>
 
