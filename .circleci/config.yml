@@ -30,6 +30,7 @@ jobs:
       - run: rm /usr/local/bin/bundle
       - run: rm /usr/local/bin/bundler
       - run: gem install bundler
+      - run: cp config/database.example.yml config/database.yml
 
       - run:
           name: install dependencies
