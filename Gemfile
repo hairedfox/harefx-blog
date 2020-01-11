@@ -8,6 +8,7 @@ gem "mysql2", ">= 0.4.4"
 gem "puma", "~> 4.1"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "graphql"
+gem "graphiql-rails"
 
 group :development, :test do
   gem "rspec-rails"
