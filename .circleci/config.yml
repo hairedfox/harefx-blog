@@ -18,6 +18,7 @@ jobs:
           MYSQL_DATABASE: test_db
           MYSQL_USER: user
           MYSQL_PASSWORD: passw0rd
+          MYSQL_HOST: 127.0.0.1
 
     working_directory: ~/repo
 
@@ -30,6 +31,23 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI;
+          command: |
+            sudo apt-get install default-mysql-client
+
       - run: gem update --system
       - run: gem uninstall bundler
       - run: rm /usr/local/bin/bundle
@@ -66,9 +84,8 @@ jobs:
               --format progress \
               $TEST_FILES
 
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
