@@ -9,6 +9,7 @@ gem "puma", "~> 4.1"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "graphql"
 gem "graphiql-rails"
+gem "config"
 
 group :development, :test do
   gem "rspec-rails"
