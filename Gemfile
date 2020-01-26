@@ -7,9 +7,9 @@ gem "rails", "~> 6.0.2", ">= 6.0.2.1"
 gem "mysql2", ">= 0.4.4"
 gem "puma", "~> 4.1"
 gem "bootsnap", ">= 1.4.2", require: false
-gem "graphql"
-gem "graphiql-rails"
+gem "graphql", "1.8.13"
 gem "config"
+gem "bcrypt", "~> 3.1.7"
 
 group :development, :test do
   gem "rspec-rails"
@@ -27,6 +27,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rubocop", "~> 0.79.0", require: false
+  gem "graphiql-rails", "1.5.0"
 end
 
 group :test do
